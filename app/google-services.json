@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "469009040140",
+    "project_id": "intelligentia-47ec3",
+    "storage_bucket": "intelligentia-47ec3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469009040140:android:c22552be17faf7231a7f29",
+        "android_client_info": {
+          "package_name": "com.diego.gehrke.learn.intelligentia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469009040140-2v0li32q5l6b3vkkkkvkjigir3vfppqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.diego.gehrke.learn.intelligentia",
+            "certificate_hash": "c4f30cb80c520ad1c990f41a4e32181c6bcd5b3c"
+          }
+        },
+        {
+          "client_id": "469009040140-gs2af4po989ld6nlteqe8h8rdl82g56s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfgkGnIgkDvFJas-NX8kgg2W_kN_O_lCg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469009040140-gs2af4po989ld6nlteqe8h8rdl82g56s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,17 +1,16 @@
 package com.diego.gehrke.learn.intelligentia.viewmodel
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
+import com.diego.gehrke.learn.intelligentia.data.local.UserPreferences
+import com.diego.gehrke.learn.intelligentia.viewmodel.baseviewmodel.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class SettingsScreenViewModel() : ViewModel() {
-    private val _languagesList: MutableList<String> = mutableListOf<String>("En-Us", "Pt-Br")
+@HiltViewModel
+class SettingsScreenViewModel @Inject constructor(
+    userPreferences: UserPreferences
+) : BaseViewModel(userPreferences) {
+
+    private val _languagesList: MutableList<String> = mutableListOf("En-Us", "Pt-Br")
     val languagesList: MutableList<String> get() = _languagesList
 
-    private val _isDarkTheme: MutableState<Boolean> = mutableStateOf(false)
-    val isDarkTheme: MutableState<Boolean> get() = _isDarkTheme
-
-    fun changeTheme() {
-        _isDarkTheme.value = true
-    }
 }

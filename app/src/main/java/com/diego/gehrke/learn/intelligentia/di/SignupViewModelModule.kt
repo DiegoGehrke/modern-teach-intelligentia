@@ -1,7 +1,7 @@
 package com.diego.gehrke.learn.intelligentia.di
 
 import com.diego.gehrke.learn.intelligentia.domain.repository.UserRepository
-import com.diego.gehrke.learn.intelligentia.domain.repository.UserRepositoryImpl
+import com.diego.gehrke.learn.intelligentia.data.remote.UserRepositoryImpl
 import com.diego.gehrke.learn.intelligentia.domain.usecase.CreateUserUseCase
 import com.diego.gehrke.learn.intelligentia.viewmodel.SignupWithEmailViewModel
 import dagger.Module

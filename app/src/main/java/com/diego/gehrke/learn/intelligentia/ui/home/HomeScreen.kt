@@ -1,7 +1,6 @@
 package com.diego.gehrke.learn.intelligentia.ui.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
@@ -22,6 +21,8 @@ import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -39,9 +40,10 @@ import com.diego.gehrke.learn.intelligentia.viewmodel.HomeViewModel
 @Composable
 fun HomeScreen(
     navHostController: NavHostController,
-    homeViewModel: HomeViewModel,
+    homeViewModel: HomeViewModel
 ) {
-    val isDarkTheme: Boolean = isSystemInDarkTheme()
+
+    val isDarkModeEnabled: Boolean by homeViewModel.isDarkModeEnabled.observeAsState(initial = false)
 
     BoxWithConstraints {
         val constraints = portraitConstraints()
@@ -75,8 +77,8 @@ fun HomeScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
-                    imageVector = if (isDarkTheme) Icons.Rounded.LightMode else Icons.Rounded.ModeNight,
-                    contentDescription = if (isDarkTheme) "Switch do light mode" else "Switch to dark mode",
+                    imageVector = if (isDarkModeEnabled) Icons.Rounded.LightMode else Icons.Rounded.ModeNight,
+                    contentDescription = if (isDarkModeEnabled) "Switch do light mode" else "Switch to dark mode",
                     tint = MaterialTheme.colorScheme.onBackground,
                     modifier = Modifier.size(32.dp)
                 )

@@ -1,9 +1,9 @@
 package com.diego.gehrke.learn.intelligentia.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.CalendarToday
 import androidx.compose.material.icons.rounded.Chat
 import androidx.compose.material.icons.rounded.Home
-import androidx.compose.material.icons.rounded.MenuBook
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -18,10 +18,10 @@ sealed class BottomNavBarRoutes (
         icon = Icons.Rounded.Person
     )
 
-    object Dictionary: BottomNavBarRoutes(
-        route = "dictionary",
-        title = "Dictionary",
-        icon = Icons.Rounded.MenuBook
+    object DailyGoal: BottomNavBarRoutes(
+        route = "dailyGoal",
+        title = "Daily Goal",
+        icon = Icons.Rounded.CalendarToday
     )
 
     object AiChat: BottomNavBarRoutes(

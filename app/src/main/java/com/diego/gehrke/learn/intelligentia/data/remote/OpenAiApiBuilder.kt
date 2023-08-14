@@ -9,13 +9,13 @@ import com.aallam.openai.api.http.Timeout
 import com.aallam.openai.api.model.ModelId
 import com.aallam.openai.client.OpenAI
 import com.aallam.openai.client.OpenAIConfig
-import com.diego.gehrke.learn.intelligentia.constants.CHAT_API_KEY
+import com.diego.gehrke.learn.intelligentia.constants.ChatApiKey
 import kotlinx.coroutines.flow.Flow
 import kotlin.time.Duration.Companion.seconds
 
 class OpenAiApiBuilder {
     private val config = OpenAIConfig(
-        token = CHAT_API_KEY.API_KEY,
+        token = ChatApiKey.API_KEY,
         timeout = Timeout(socket = 60.seconds)
     )
     private val openAiApi = OpenAI(config)

@@ -1,8 +1,8 @@
-package com.diego.gehrke.learn.intelligentia.domain.repository
+package com.diego.gehrke.learn.intelligentia.data.remote
 
 import com.diego.gehrke.learn.intelligentia.domain.model.Result
+import com.diego.gehrke.learn.intelligentia.domain.repository.UserRepository
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor() : UserRepository {

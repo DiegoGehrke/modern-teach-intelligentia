@@ -29,6 +29,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -46,6 +47,7 @@ import androidx.constraintlayout.compose.Dimension
 import androidx.navigation.NavHostController
 import com.diego.gehrke.learn.intelligentia.R
 import com.diego.gehrke.learn.intelligentia.ui.fonts.AvenirNextProFontFamily
+import com.diego.gehrke.learn.intelligentia.ui.theme.ApplyTheme
 import com.diego.gehrke.learn.intelligentia.viewmodel.SettingsScreenViewModel
 
 @Composable
@@ -53,78 +55,78 @@ fun SettingsScreen(
     settingsScreenViewModel: SettingsScreenViewModel,
     navHostController: NavHostController
 ) {
-
     val scrollState = rememberScrollState()
-    /* var darkThemeCheckedState by rememberSaveable {
-         mutableStateOf(false)
-     }*/
-    val darkThemeCheckedState by settingsScreenViewModel.isDarkTheme
+    val isDarkModeEnabled: Boolean by settingsScreenViewModel.isDarkModeEnabled.observeAsState(initial = false)
     val languagesList = settingsScreenViewModel.languagesList
-    ConstraintLayout(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
-        val (
-            backButton,
-            title,
-            scrollView,
-            darkThemeSwitch,
-        ) = createRefs()
-        IconButton(onClick = { navHostController.popBackStack() },
+    ApplyTheme(isDarkModeEnabled = isDarkModeEnabled) {
+        ConstraintLayout(
             modifier = Modifier
-                .constrainAs(backButton) {
-                    start.linkTo(parent.start, 4.dp)
-                    top.linkTo(parent.top, 24.dp)
-                    width = Dimension.value(48.dp)
-                    height = Dimension.value(48.dp)
-                }
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background)
         ) {
-            Icon(
-                painter = painterResource(id = R.drawable.arrow_back),
-                contentDescription = "Settings",
-                tint = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.size(28.dp)
-            )
-        }
-
-        Text(
-            text = "Settings",
-            fontFamily = AvenirNextProFontFamily.avenirFont,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.constrainAs(title) {
-                start.linkTo(backButton.end, 4.dp)
-                top.linkTo(backButton.top)
-                bottom.linkTo(backButton.bottom)
+            val (
+                backButton,
+                title,
+                scrollView,
+                darkThemeSwitch,
+            ) = createRefs()
+            IconButton(onClick = { navHostController.popBackStack() },
+                modifier = Modifier
+                    .constrainAs(backButton) {
+                        start.linkTo(parent.start, 4.dp)
+                        top.linkTo(parent.top, 24.dp)
+                        width = Dimension.value(48.dp)
+                        height = Dimension.value(48.dp)
+                    }
+            ) {
+                Icon(
+                    painter = painterResource(id = R.drawable.arrow_back),
+                    contentDescription = "Settings",
+                    tint = MaterialTheme.colorScheme.onBackground,
+                    modifier = Modifier.size(28.dp)
+                )
             }
-        )
 
-        Column(modifier = Modifier
-            .fillMaxHeight()
-            .scrollable(
-                state = scrollState,
-                orientation = Orientation.Vertical
-            )
-            .constrainAs(scrollView) {
-                end.linkTo(parent.end)
-                start.linkTo(parent.start)
-                top.linkTo(backButton.bottom, 24.dp)
-            }
-        ) {
-            SettingSwitchItem(
-                checked = darkThemeCheckedState,
-                onCheckedChange = {
-                    settingsScreenViewModel.changeTheme()
+            Text(
+                text = "Settings",
+                fontFamily = AvenirNextProFontFamily.avenirFont,
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+                modifier = Modifier.constrainAs(title) {
+                    start.linkTo(backButton.end, 4.dp)
+                    top.linkTo(backButton.top)
+                    bottom.linkTo(backButton.bottom)
                 },
-                title = "Dark mode",
-                description = "Recommended for places with low light"
+                color = MaterialTheme.colorScheme.onBackground
             )
 
-            DropDownMenu(languagesList)
-        }
+            Column(modifier = Modifier
+                .fillMaxHeight()
+                .scrollable(
+                    state = scrollState,
+                    orientation = Orientation.Vertical
+                )
+                .constrainAs(scrollView) {
+                    end.linkTo(parent.end)
+                    start.linkTo(parent.start)
+                    top.linkTo(backButton.bottom, 24.dp)
+                }
+            ) {
+                SettingSwitchItem(
+                    checked = isDarkModeEnabled,
+                    onCheckedChange = {
+                        settingsScreenViewModel.updateDarkModeEnabled(!isDarkModeEnabled)
+                    },
+                    title = "Dark mode",
+                    description = "Recommended for places with low light"
+                )
 
+                DropDownMenu(languagesList)
+            }
+
+        }
     }
+
 }
 
 @Composable
@@ -160,7 +162,8 @@ private fun SettingSwitchItem(
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp,
                 maxLines = 1,
-                modifier = Modifier.alpha(contentAlpha)
+                modifier = Modifier.alpha(contentAlpha),
+                color = MaterialTheme.colorScheme.onBackground
             )
             Text(
                 text = description,
@@ -168,7 +171,8 @@ private fun SettingSwitchItem(
                 fontWeight = FontWeight.Normal,
                 fontSize = 12.sp,
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.alpha(contentAlpha)
+                modifier = Modifier.alpha(contentAlpha),
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
 
@@ -196,7 +200,9 @@ fun DropDownMenu(
     Row(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.fillMaxWidth().padding(end = 16.dp)
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(end = 16.dp)
     ) {
         Box(
             modifier = Modifier
@@ -207,7 +213,8 @@ fun DropDownMenu(
                 text = "Application language",
                 fontFamily = AvenirNextProFontFamily.avenirFont,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp
+                fontSize = 16.sp,
+                color = MaterialTheme.colorScheme.onBackground
             )
         }
         Box(

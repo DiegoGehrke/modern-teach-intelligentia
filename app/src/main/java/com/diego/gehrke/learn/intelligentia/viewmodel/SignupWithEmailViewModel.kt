@@ -1,6 +1,5 @@
 package com.diego.gehrke.learn.intelligentia.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.diego.gehrke.learn.intelligentia.domain.model.Result

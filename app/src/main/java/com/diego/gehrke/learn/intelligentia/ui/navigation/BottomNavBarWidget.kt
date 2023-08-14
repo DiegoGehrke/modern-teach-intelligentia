@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.NotListedLocation
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -20,13 +21,16 @@ fun BottomNavBar(navController: NavHostController) {
     val screens = listOf(
         BottomNavBarRoutes.Home,
         BottomNavBarRoutes.AiChat,
-        BottomNavBarRoutes.Dictionary,
+        BottomNavBarRoutes.DailyGoal,
         BottomNavBarRoutes.Profile
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
 
-    BottomAppBar {
+    BottomAppBar(
+        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        contentColor = MaterialTheme.colorScheme.onSurfaceVariant
+    ) {
         screens.forEach { screen ->
             AddItem(
                 screen = screen,
@@ -41,14 +45,22 @@ fun BottomNavBar(navController: NavHostController) {
 fun RowScope.AddItem(
     screen: BottomNavBarRoutes,
     currentDestination: NavDestination?,
-    navController: NavHostController
+    navController: NavHostController,
 ) {
     NavigationBarItem(
+
         label = {
-            Text(text = screen.title)
+            Text(
+                text = screen.title,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         },
         icon = {
-            Icon(imageVector = screen.icon?: Icons.Default.NotListedLocation, contentDescription = "")
+            Icon(
+                imageVector = screen.icon ?: Icons.Default.NotListedLocation,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant
+            )
         },
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route

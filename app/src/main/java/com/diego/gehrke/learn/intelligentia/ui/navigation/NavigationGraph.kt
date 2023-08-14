@@ -19,7 +19,8 @@ import com.diego.gehrke.learn.intelligentia.viewmodel.SignupWithEmailViewModel
 fun NavigationGraph(
     navController: NavHostController,
     signupWithEmailViewModel: SignupWithEmailViewModel,
-    settingsScreenViewModel: SettingsScreenViewModel
+    settingsScreenViewModel: SettingsScreenViewModel,
+    homeViewModel: HomeViewModel
 ) {
     NavHost(
         navController = navController,
@@ -38,7 +39,7 @@ fun NavigationGraph(
             SetUsernameScreen(navController, signupWithEmailViewModel)
         }
         composable(route = NavigationRoutes.Home.route) {
-            HomeScreen(navController, HomeViewModel())
+            HomeScreen(navController, homeViewModel)
         }
         composable(route = NavigationRoutes.Settings.route) {
             SettingsScreen(settingsScreenViewModel, navController)

@@ -6,4 +6,4 @@ data class CompletionRequest(
     val max_tokens: Int,
     val temperature: Float = 0f,
     val messages: List<String>
-    )
+)

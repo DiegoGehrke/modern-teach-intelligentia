@@ -4,6 +4,7 @@ plugins {
     id("com.google.gms.google-services")
     id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -21,6 +22,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+
     }
 
     buildTypes {
@@ -70,16 +73,25 @@ dependencies {
     implementation("androidx.compose.ui:ui")
     //chat gpt
     implementation("com.aallam.openai:openai-client:3.2.0")
-    //http
+    //ktor
     implementation("io.ktor:ktor-client-core:2.3.0")
     implementation("io.ktor:ktor-client-json:2.3.0")
     implementation("io.ktor:ktor-client-okhttp:2.3.0")
+    //room
+    implementation("androidx.room:room-runtime:2.5.2")
+    // Import the BoM for the Firebase platform
+    implementation(project.dependencies.platform("com.google.firebase:firebase-bom:32.2.2"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
+
+    // Declare the dependency for the Firestore library
+    implementation ("com.google.firebase:firebase-firestore-ktx")
+    annotationProcessor("androidx.room:room-compiler:2.5.2")
     implementation("io.coil-kt:coil-compose:2.2.0")
     implementation("androidx.compose.ui:ui-util:1.4.0")
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-    implementation("com.google.firebase:firebase-auth-ktx:22.1.0")
+    implementation("com.google.firebase:firebase-auth-ktx")
     implementation("com.google.dagger:hilt-android:2.45")
     kapt ("com.google.dagger:hilt-android-compiler:2.45")
     implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
