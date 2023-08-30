@@ -10,3 +10,6 @@ without having to upgrade, the counter starts when you create your account).
 - You should also add a "google-services.json" which is from Firebase;
 - The layout of the chat screen (actually all screens) is not very nice, you can try to make it better first XD;
 - Just compile the app and have fun.
+
+# VIDEO
+https://youtu.be/djNvTHferI8
