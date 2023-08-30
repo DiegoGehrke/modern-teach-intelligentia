@@ -1,7 +1,7 @@
-#Modern Teach Intelligentia
+# Modern Teach Intelligentia
 An application to learn the English language (in development). Integrated GPT chat, Jetpack Compose, MVVM, Dagger Hilt, Kotlin.
 
-#How to use?
+# How to use?
 First of all, create an new Chat Gpt account and get your free API Key (You will receive 3 months of free access, without having to upgrade, the counter starts when you create your account).
 Then go to: app > src > main > java/com/diego/gehrke/learn/intelligentia > constants > CHAT_API_KEY.kt
 Now, paste your Chat Gpt Api Key on the constant variable API_KEY value;
